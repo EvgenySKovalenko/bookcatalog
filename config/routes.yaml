@@ -1,3 +1,11 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+genres:
+    path: /genres
+    controller: App\Controller\GenresController::index
+    
+genre_edit:
+    path: /genre_edit/{id}
+    controller: App\Controller\GenresController::edit

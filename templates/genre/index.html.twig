@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Genres{% endblock %}
+
+{% block body %}
+    <h1>Show Books by Genre</h1>
+        <form method="post">            
+            {% for genre in genres %}
+                <input type="radio" name="name" value="{{ genre.name }}"> {{ genre.name }}<br>                
+            {% endfor %}
+            <input type="submit" value="Show">
+        </form>
+            
+    <h1>Create Genre</h1>        
+    {{ form_start(form_create) }}
+    {{ form_widget(form_create) }}
+    {{ form_end(form_create) }}            
+{% endblock %}
