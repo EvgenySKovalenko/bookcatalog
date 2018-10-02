@@ -14,5 +14,15 @@
     <h1>Create Genre</h1>        
     {{ form_start(form_create) }}
     {{ form_widget(form_create) }}
-    {{ form_end(form_create) }}            
+    {{ form_end(form_create) }}
+    
+    <h1>Genres</h1>
+    <ul>
+        {% for genre in genres %}
+            <li>            
+                {{ genre.name }} <a href="{{ path('genre_edit', {'id': genre.id}) }}">EDIT</a> 
+                <a href="{{ path('genre_delete', {'id': genre.id}) }}">DELETE</a>
+            </li>
+        {% endfor %}        
+    </ul>
 {% endblock %}

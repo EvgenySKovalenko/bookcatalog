@@ -9,3 +9,7 @@ genres:
 genre_edit:
     path: /genre_edit/{id}
     controller: App\Controller\GenresController::edit
+    
+genre_delete:  
+    path: /genre_delete/{id}
+    controller: App\Controller\GenresController::delete    

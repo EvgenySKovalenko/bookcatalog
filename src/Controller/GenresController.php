@@ -39,6 +39,19 @@ class GenresController extends AbstractController
             ]);
     }   
     
+    public function delete($id)
+    {
+        $genre = $this
+            ->getDoctrine()
+            ->getRepository(Genre::class)
+            ->find($id);         
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($genre);
+        $entityManager->flush();  
+        
+        return $this->redirectToRoute('genres');        
+    }    
+    
     public function index(Request $request)
     {        
         //Create Genre form
