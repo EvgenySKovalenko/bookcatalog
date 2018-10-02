@@ -12,4 +12,12 @@ genre_edit:
     
 genre_delete:  
     path: /genre_delete/{id}
-    controller: App\Controller\GenresController::delete    
+    controller: App\Controller\GenresController::delete 
+    
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+    
+index:
+    path: /
+    controller: App\Controller\IndexController::index    
