@@ -14,9 +14,10 @@
     <ul>
         {% for author in authors %}
             <li>            
-                {{ author.name }}. Birthdate: {{ author.birthdate|date('Y-m-d') }}. Gender: {{ author.gender }}.
+                {{ author.name }}. Birthdate: {{ author.birthdate|date('Y-m-d') }}. 
+                Gender: {{ author.gender }}.
                 <a href="{{ path('author_edit', {'id': author.id}) }}">EDIT</a> 
-                {#<a href="{{ path('genre_delete', {'id': genre.id}) }}">DELETE</a>#}
+                <a href="{{ path('author_delete', {'id': author.id}) }}">DELETE</a>
             </li>
         {% endfor %}        
     </ul>

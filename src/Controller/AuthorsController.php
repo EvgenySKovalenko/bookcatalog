@@ -42,7 +42,20 @@ class AuthorsController extends AbstractController
         return $this->render('author/edit.html.twig', [
                 'form'  =>  $form->createView()
             ]);
-    }     
+    }  
+    
+    public function delete($id)
+    {
+        $author = $this
+            ->getDoctrine()
+            ->getRepository(Author::class)
+            ->find($id);         
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($author);
+        $entityManager->flush();  
+        
+        return $this->redirectToRoute('authors');        
+    }    
     
     public function index(Request $request)
     {        

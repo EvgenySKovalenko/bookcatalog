@@ -29,4 +29,7 @@ authors:
 author_edit:
     path: /author_edit/{id}
     controller: App\Controller\AuthorsController::edit 
-     
+    
+author_delete:  
+    path: /author_delete/{id}
+    controller: App\Controller\AuthorsController::delete     
