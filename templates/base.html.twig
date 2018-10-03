@@ -14,8 +14,12 @@
         <a href="{{ path('index')}}">[MAIN]</a> 
         <a href="{{ path('genres')}}">[GENRES]</a> 
         <a href="{{ path('authors')}}">[AUTHORS]</a> 
+{% if app.user is not empty %}  
+        <a href="{{ path('user_profile', {'id': app.user.id})}}">[USER PAGE]</a>
+{% else %}
         <a href="{{ path('user_registration')}}">[REGISTER]</a> 
-        <a href="{{ path('login')}}">[LOGIN]</a>
+        <a href="{{ path('login')}}">[LOGIN]</a>    
+{% endif %}
         {% block body %}
             
         {% endblock %}

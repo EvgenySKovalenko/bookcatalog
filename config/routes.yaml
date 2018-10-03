@@ -42,4 +42,8 @@ book_edit:
     
 book_delete:  
     path: /book_delete/{id}
-    controller: App\Controller\BooksController::delete     
+    controller: App\Controller\BooksController::delete 
+    
+user_profile:
+    path: /user/{id}
+    controller: App\Controller\UserController::profile     

@@ -5,7 +5,7 @@
 {% block body %}
     
     {% for message in app.flashes('error') %}
-        <div class="flash-notice" style="color: red;">
+        <div class="flash-error" style="color: red;">
             {{ message }}
         </div>
     {% endfor %}    

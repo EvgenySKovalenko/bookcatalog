@@ -44,7 +44,19 @@ class GenresController extends AbstractController
         $genre = $this
             ->getDoctrine()
             ->getRepository(Genre::class)
-            ->find($id);         
+            ->find($id);
+        
+        $genre_books = $genre->getBooks();
+
+        if (count($genre_books)) {
+            $this->addFlash(
+                'error',
+                'Error: Genre can not be deleted, because there are books of this genre'
+            );
+            
+            return $this->redirectToRoute('genres');           
+        }
+               
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($genre);
         $entityManager->flush();  

@@ -21,7 +21,7 @@ class User implements UserInterface {
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"updateusername"})
      */
     private $username;
 
@@ -50,6 +50,10 @@ class User implements UserInterface {
 
     // other properties and methods
 
+    public function getId() {
+        return $this->id;
+    }    
+    
     public function getUsername() {
         return $this->username;
     }
