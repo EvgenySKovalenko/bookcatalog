@@ -6,10 +6,23 @@
     <h1>Show Books by Author</h1>
         <form method="post">            
             {% for author in authors %}
-                <input type="radio" name="name" value="{{ author.name }}"> {{ author.name }}<br>                
+                <input type="radio" name="author_id" value="{{ author.id }}" 
+                       {{ author.id == author_selected_id ? 'checked' : ''}}> {{ author.name }}<br>                
             {% endfor %}
             <input type="submit" value="Show">
         </form>
+            
+    {% if author_selected is not empty %}
+        <h1>Books of {{ author_selected.name }}</h1>
+        {% if author_selected.books is not empty %}
+            {% for book in author_selected.books %}
+                {% include 'book/book.html.twig' %}
+                <br><br>
+            {% endfor %}
+        {% else %}    
+            No books.            
+        {% endif %}
+    {% endif %}
             
     <h1>Add Author</h1>        
     {{ form_start(form_create) }}

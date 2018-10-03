@@ -24,8 +24,9 @@ index:
     controller: App\Controller\IndexController::index  
     
 authors:
-    path: /authors
-    controller: App\Controller\AuthorsController::index    
+    path: /authors/{id}
+    controller: App\Controller\AuthorsController::index  
+    defaults:   { id: 0 }    
     
 author_edit:
     path: /author_edit/{id}

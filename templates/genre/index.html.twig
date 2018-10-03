@@ -17,6 +17,7 @@
         {% if genre_selected.books is not empty %}
             {% for book in genre_selected.books %}
                 {% include 'book/book.html.twig' %}
+                <br><br>
             {% endfor %}
         {% else %}    
             No books.            

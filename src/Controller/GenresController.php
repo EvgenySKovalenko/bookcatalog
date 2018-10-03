@@ -81,15 +81,7 @@ class GenresController extends AbstractController
         
         $repository = $this->getDoctrine()->getRepository(Genre::class);        
         $genres = $repository->findAll(); 
-        /*
-        if ($id) {
-            //TODO: get $books_of_genre and $genre_selected
-            $genre_selected = $repository->find($id);
-        } else {
-            $genre_selected = [];
-            //$books_of_genre = [];
-        }
-        */
+
         $genre_selected = $repository->find($id);
         
         return $this->render('genre/index.html.twig', [
@@ -97,8 +89,6 @@ class GenresController extends AbstractController
                 'form_create'  =>  $form_create->createView(),
                 'genre_selected' => $genre_selected,
                 'genre_selected_id' => $id
-                //'genre_id'  => $id,
-                //'books_of_genre' => $books_of_genre
             ]);        
     }
 }

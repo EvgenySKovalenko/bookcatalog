@@ -57,8 +57,14 @@ class AuthorsController extends AbstractController
         return $this->redirectToRoute('authors');        
     }    
     
-    public function index(Request $request)
-    {        
+    public function index($id, Request $request)
+    {      
+        //Process Author filter
+        $author_id = $request->get('author_id');
+        if ($author_id) {
+            return $this->redirectToRoute('authors', ['id' => $author_id]);
+        }
+        
         //Create Author form
         $author = new Author();
         $form_create = $this->createFormBuilder($author)
@@ -81,11 +87,15 @@ class AuthorsController extends AbstractController
         }  
         
         $repository = $this->getDoctrine()->getRepository(Author::class);
-        $authors = $repository->findAll();         
+        $authors = $repository->findAll();  
+        
+        $author_selected = $repository->find($id);
         
         return $this->render('author/index.html.twig', [
                 'authors' => $authors,
-                'form_create'  =>  $form_create->createView()
+                'form_create'  =>  $form_create->createView(),
+                'author_selected' => $author_selected,
+                'author_selected_id' => $id            
             ]);        
     }
 }
