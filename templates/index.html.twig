@@ -3,6 +3,25 @@
 {% block title %}Books Catalog{% endblock %}
 
 {% block body %}
-    <h1>Books Catalog</h1>
+    <h1>Add Book</h1>        
+    {{ form_start(form_create) }}
+    {{ form_widget(form_create) }}
+    {{ form_end(form_create) }}
+    
+    <h1>Latest Books</h1>
+
+    <ul>
+        {% for book in books %}
+            <li>            
+                <strong>{{ book.name }}</strong><br> 
+                Author: <a href="">{{ book.author.name }}</a><br>
+                Genre: {{ book.genre.name }}<br>
+                Published: {{ book.publishdate|date('Y-m-d') }}<br>
+                Rating: {{ book.rating }}<br>
+                {#<a href="{{ path('genre_edit', {'id': genre.id}) }}">EDIT</a> 
+                <a href="{{ path('genre_delete', {'id': genre.id}) }}">DELETE</a>#}
+            </li>
+        {% endfor %}        
+    </ul>        
 {% endblock %}
 
