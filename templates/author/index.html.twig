@@ -3,7 +3,13 @@
 {% block title %}Authors{% endblock %}
 
 {% block body %}
-
+    <h1>Show Books by Author</h1>
+        <form method="post">            
+            {% for author in authors %}
+                <input type="radio" name="name" value="{{ author.name }}"> {{ author.name }}<br>                
+            {% endfor %}
+            <input type="submit" value="Show">
+        </form>
             
     <h1>Add Author</h1>        
     {{ form_start(form_create) }}
