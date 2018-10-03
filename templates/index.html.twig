@@ -18,8 +18,9 @@
                 Genre: {{ book.genre.name }}<br>
                 Published: {{ book.publishdate|date('Y-m-d') }}<br>
                 Rating: {{ book.rating }}<br>
-                {#<a href="{{ path('genre_edit', {'id': genre.id}) }}">EDIT</a> 
-                <a href="{{ path('genre_delete', {'id': genre.id}) }}">DELETE</a>#}
+                <a href="{{ path('book_edit', {'id': book.id}) }}">EDIT</a> 
+                {#<a href="{{ path('genre_delete', {'id': genre.id}) }}">DELETE</a>#}
+                <br><br>
             </li>
         {% endfor %}        
     </ul>        
