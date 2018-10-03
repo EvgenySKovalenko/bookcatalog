@@ -15,6 +15,35 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthorsController extends AbstractController
 {  
+    public function edit($id, Request $request)
+    {
+        $author = $this
+            ->getDoctrine()
+            ->getRepository(Author::class)
+            ->find($id);
+        $form = $this->createFormBuilder($author)
+            ->add('name', TextType::class)
+            ->add('birthdate', BirthdayType::class)
+            ->add('gender', ChoiceType::class, 
+                    ['choices' => ['male' => 'male', 'female' => 'female']])                
+            ->add('save', SubmitType::class, array('label' => 'Update Author'))
+            ->getForm(); 
+        
+        //Form handling
+        $form->handleRequest($request); 
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            
+            return $this->redirectToRoute('authors');
+        }
+
+        return $this->render('author/edit.html.twig', [
+                'form'  =>  $form->createView()
+            ]);
+    }     
+    
     public function index(Request $request)
     {        
         //Create Author form

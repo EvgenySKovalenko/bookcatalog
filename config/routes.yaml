@@ -25,3 +25,8 @@ index:
 authors:
     path: /authors
     controller: App\Controller\AuthorsController::index    
+    
+author_edit:
+    path: /author_edit/{id}
+    controller: App\Controller\AuthorsController::edit 
+     
