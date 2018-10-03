@@ -49,7 +49,19 @@ class AuthorsController extends AbstractController
         $author = $this
             ->getDoctrine()
             ->getRepository(Author::class)
-            ->find($id);         
+            ->find($id); 
+        
+        $author_books = $author->getBooks();
+
+        if (count($author_books)) {
+            $this->addFlash(
+                'error',
+                'Error: Author can not be deleted, because there are his books'
+            );
+            
+            return $this->redirectToRoute('authors');           
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($author);
         $entityManager->flush();  

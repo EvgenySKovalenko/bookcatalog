@@ -1,7 +1,7 @@
-                <strong>{{ book.name }}</strong><br> 
-                Author: <a href="">{{ book.author.name }}</a><br>
-                Genre: {{ book.genre.name }}<br>
-                Published: {{ book.publishdate|date('Y-m-d') }}<br>
-                Rating: {{ book.rating }}<br>
-                <a href="{{ path('book_edit', {'id': book.id}) }}">EDIT</a> 
-                <a href="{{ path('book_delete', {'id': book.id}) }}">DELETE</a>
+<strong>{{ book.name }}</strong><br> 
+Author: <a href="{{ path('authors', {'id': book.author.id}) }}">{{ book.author.name }}</a><br>
+Genre: <a href="{{ path('genres', {'id': book.genre.id}) }}">{{ book.genre.name }}</a><br>
+Published: {{ book.publishdate|date('Y-m-d') }}<br>
+Rating: {{ book.rating }}<br>
+<a href="{{ path('book_edit', {'id': book.id}) }}">EDIT</a> 
+<a href="{{ path('book_delete', {'id': book.id}) }}">DELETE</a>

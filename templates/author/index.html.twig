@@ -3,6 +3,13 @@
 {% block title %}Authors{% endblock %}
 
 {% block body %}
+    
+    {% for message in app.flashes('error') %}
+        <div class="flash-notice" style="color: red;">
+            {{ message }}
+        </div>
+    {% endfor %}    
+    
     <h1>Show Books by Author</h1>
         <form method="post">            
             {% for author in authors %}
