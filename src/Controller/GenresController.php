@@ -52,15 +52,22 @@ class GenresController extends AbstractController
         return $this->redirectToRoute('genres');        
     }    
     
-    public function index(Request $request)
+    public function index($id, Request $request)
     {        
+        //Process Genre filter
+        $genre_id = $request->get('genre_id');
+        if ($genre_id) {
+            return $this->redirectToRoute('genres', ['id' => $genre_id]);
+        }
+        
         //Create Genre form
-        $genre = new Genre();
-        $form_create = $this->createFormBuilder($genre)
+        $genre_empty = new Genre();
+        $form_create = $this->createFormBuilder($genre_empty)
             ->add('name', TextType::class)
             ->add('save', SubmitType::class, array('label' => 'Create Genre'))
             ->getForm(); 
         
+        //Process Create Genre form
         $form_create->handleRequest($request);
 
         if ($form_create->isSubmitted() && $form_create->isValid()) {           
@@ -69,15 +76,29 @@ class GenresController extends AbstractController
             $entityManager->persist($genre_new);
             $entityManager->flush();
         
-            return $this->redirectToRoute('genres');
+            return $this->redirectToRoute('genres', ['id' => $id]);
         }
         
-        $repository = $this->getDoctrine()->getRepository(Genre::class);
-        $genres = $repository->findAll();        
+        $repository = $this->getDoctrine()->getRepository(Genre::class);        
+        $genres = $repository->findAll(); 
+        /*
+        if ($id) {
+            //TODO: get $books_of_genre and $genre_selected
+            $genre_selected = $repository->find($id);
+        } else {
+            $genre_selected = [];
+            //$books_of_genre = [];
+        }
+        */
+        $genre_selected = $repository->find($id);
         
         return $this->render('genre/index.html.twig', [
                 'genres' => $genres,
-                'form_create'  =>  $form_create->createView()
+                'form_create'  =>  $form_create->createView(),
+                'genre_selected' => $genre_selected,
+                'genre_selected_id' => $id
+                //'genre_id'  => $id,
+                //'books_of_genre' => $books_of_genre
             ]);        
     }
 }

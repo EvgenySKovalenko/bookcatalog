@@ -13,13 +13,7 @@
     <ul>
         {% for book in books %}
             <li>            
-                <strong>{{ book.name }}</strong><br> 
-                Author: <a href="">{{ book.author.name }}</a><br>
-                Genre: {{ book.genre.name }}<br>
-                Published: {{ book.publishdate|date('Y-m-d') }}<br>
-                Rating: {{ book.rating }}<br>
-                <a href="{{ path('book_edit', {'id': book.id}) }}">EDIT</a> 
-                <a href="{{ path('book_delete', {'id': book.id}) }}">DELETE</a>
+                {% include 'book/book.html.twig' %}
                 <br><br>
             </li>
         {% endfor %}        

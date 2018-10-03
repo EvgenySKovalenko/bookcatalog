@@ -27,7 +27,7 @@ class Book
     private $publishdate;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateadded;
 

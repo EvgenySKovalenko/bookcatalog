@@ -6,10 +6,22 @@
     <h1>Show Books by Genre</h1>
         <form method="post">            
             {% for genre in genres %}
-                <input type="radio" name="name" value="{{ genre.name }}"> {{ genre.name }}<br>                
+                <input type="radio" name="genre_id" value="{{ genre.id }}"
+                   {{ genre.id == genre_selected_id ? 'checked' : ''}}> {{ genre.name }}<br>                
             {% endfor %}
             <input type="submit" value="Show">
         </form>
+            
+    {% if genre_selected is not empty %}
+        <h1>Books in '{{ genre_selected.name }}' Genre</h1>
+        {% if genre_selected.books is not empty %}
+            {% for book in genre_selected.books %}
+                {% include 'book/book.html.twig' %}
+            {% endfor %}
+        {% else %}    
+            No books.            
+        {% endif %}
+    {% endif %}
             
     <h1>Create Genre</h1>        
     {{ form_start(form_create) }}

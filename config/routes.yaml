@@ -3,8 +3,9 @@
 #    controller: App\Controller\DefaultController::index
 
 genres:
-    path: /genres
+    path: /genres/{id}
     controller: App\Controller\GenresController::index
+    defaults:   { id: 0 }
     
 genre_edit:
     path: /genre_edit/{id}
