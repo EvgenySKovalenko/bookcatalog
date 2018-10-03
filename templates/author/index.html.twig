@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Authors{% endblock %}
+
+{% block body %}
+
+            
+    <h1>Add Author</h1>        
+    {{ form_start(form_create) }}
+    {{ form_widget(form_create) }}
+    {{ form_end(form_create) }}
+    
+    <h1>Authors</h1>
+    <ul>
+        {% for author in authors %}
+            <li>            
+                {{ author.name }}. Birthdate: {{ author.birthdate|date('Y-m-d') }}. Gender: {{ author.gender }}.
+                {#<a href="{{ path('genre_edit', {'id': genre.id}) }}">EDIT</a> 
+                <a href="{{ path('genre_delete', {'id': genre.id}) }}">DELETE</a>#}
+            </li>
+        {% endfor %}        
+    </ul>
+    
+{% endblock %}

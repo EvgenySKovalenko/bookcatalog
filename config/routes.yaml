@@ -20,4 +20,8 @@ login:
     
 index:
     path: /
-    controller: App\Controller\IndexController::index    
+    controller: App\Controller\IndexController::index  
+    
+authors:
+    path: /authors
+    controller: App\Controller\AuthorsController::index    
