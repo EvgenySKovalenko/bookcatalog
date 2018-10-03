@@ -44,8 +44,8 @@ class IndexController extends AbstractController
         }
         
         $repository = $this->getDoctrine()->getRepository(Book::class);
-        //$books = $repository->findAll(); 
-        $books = $repository->findBy([], ['dateadded' => 'DESC'], 10);
+        //$books = $repository->findBy([], ['dateadded' => 'DESC'], 10);
+        $books = $repository->findBy([], ['dateadded' => 'DESC']);
         
         return $this->render('index.html.twig', [
                 'books' => $books,

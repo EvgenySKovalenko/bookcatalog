@@ -45,5 +45,18 @@ class BooksController extends AbstractController
                 'form'  =>  $form->createView()
             ]);
     } 
+    
+    public function delete($id)
+    {
+        $book = $this
+            ->getDoctrine()
+            ->getRepository(Book::class)
+            ->find($id);         
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($book);
+        $entityManager->flush();  
+        
+        return $this->redirectToRoute('index');        
+    }    
 }
 
