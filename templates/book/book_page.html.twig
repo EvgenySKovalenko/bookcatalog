@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.name }}{% endblock %}
+
+{% block body %}
+
+    <h1>Book: {{ book.name }}</h1>
+
+    {% if app.user is not empty %}
+        <a href="#" id="add_{{ book.id }}" class='addtofavorites' data-bookid='{{ book.id }}'
+            style="display: {{ book.id in app.user.getFavoritebooks() ? 'none' : 'inline' }};">[ADD TO FAVORITES]</a> 
+        <a href="#" id="remove_{{ book.id }}" class='removefromfavorites' data-bookid='{{ book.id }}' 
+           style="display: {{ book.id in app.user.getFavoritebooks() ? 'inline' : 'none' }};">[REMOVE FROM FAVORITES]</a>
+    {% endif %}    
+        <br> 
+    Author: <a href="{{ path('authors', {'id': book.author.id}) }}">{{ book.author.name }}</a><br>
+    Genre: <a href="{{ path('genres', {'id': book.genre.id}) }}">{{ book.genre.name }}</a><br>
+    Published: {{ book.publishdate|date('Y-m-d') }}<br>
+    Rating: {{ book.rating }}<br>
+    <a href="{{ path('book_edit', {'id': book.id}) }}">[EDIT]</a> 
+    <a href="{{ path('book_delete', {'id': book.id}) }}">[DELETE]</a>
+    
+    <h2>Recommended books</h2>
+    {% if recommended.books_genre is not empty %}
+        {% for book in recommended.books_genre %}
+            {% include 'book/book.html.twig' %}
+            <br><br>
+        {% endfor %} 
+    {% endif %}
+    {% if recommended.books_author is not empty %}
+        {% for book in recommended.books_author %}
+            {% include 'book/book.html.twig' %}
+            <br><br>
+        {% endfor %} 
+    {% endif %} 
+    {% if recommended.books_others is not empty %}
+        {% for book in recommended.books_others %}
+            {% include 'book/book.html.twig' %}
+            <br><br>
+        {% endfor %} 
+    {% endif %}    
+
+{% endblock %}

@@ -1,4 +1,4 @@
-<strong>{{ book.name }}</strong>
+<a href="{{ path('book', {'id': book.id}) }}"><strong>{{ book.name }}</strong></a>
 
 {% if app.user is not empty %}
     <a href="#" id="add_{{ book.id }}" class='addtofavorites' data-bookid='{{ book.id }}'

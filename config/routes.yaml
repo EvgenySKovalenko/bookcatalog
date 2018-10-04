@@ -1,7 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
 genres:
     path: /genres/{id}
     controller: App\Controller\GenresController::index
@@ -38,7 +34,11 @@ author_edit:
     
 author_delete:  
     path: /author_delete/{id}
-    controller: App\Controller\AuthorsController::delete 
+    controller: App\Controller\AuthorsController::delete
+    
+book:  
+    path: /book/{id}
+    controller: App\Controller\BooksController::book    
     
 book_edit:
     path: /book_edit/{id}
