@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Book;
 use App\Entity\Genre;
 use App\Entity\Author;
@@ -12,11 +11,10 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class IndexController extends AbstractController
 {
-    public function index(Request $request, AuthorizationCheckerInterface $authChecker)
+    public function index(Request $request)
     {        
         //Create Book form
         $book = new Book();
@@ -45,8 +43,7 @@ class IndexController extends AbstractController
         }
         
         $repository = $this->getDoctrine()->getRepository(Book::class);
-        //$books = $repository->findBy([], ['dateadded' => 'DESC'], 10);
-        $books = $repository->findBy([], ['dateadded' => 'DESC']);       
+        $books = $repository->findBy([], ['dateadded' => 'DESC'], 10);
         
         return $this->render('index.html.twig', [
                 'books' => $books,
