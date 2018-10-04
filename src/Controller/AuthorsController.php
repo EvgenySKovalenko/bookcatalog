@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthorsController extends AbstractController
 {  
+    private $genders = ['male' => 'male', 'female' => 'female'];
+    
     public function edit($id, Request $request)
     {
         $author = $this
@@ -22,7 +24,7 @@ class AuthorsController extends AbstractController
             ->add('name', TextType::class)
             ->add('birthdate', BirthdayType::class)
             ->add('gender', ChoiceType::class, 
-                    ['choices' => ['male' => 'male', 'female' => 'female']])                
+                    ['choices' => $this->genders])                
             ->add('save', SubmitType::class, array('label' => 'Update Author'))
             ->getForm(); 
         
@@ -80,7 +82,7 @@ class AuthorsController extends AbstractController
             ->add('name', TextType::class)
             ->add('birthdate', BirthdayType::class)
             ->add('gender', ChoiceType::class, 
-                    ['choices' => ['male' => 'male', 'female' => 'female']])
+                    ['choices' => $this->genders])
             ->add('save', SubmitType::class, array('label' => 'Add Author'))
             ->getForm();
         
