@@ -4,10 +4,25 @@
 
 {% block body %}   
     <h1>Username: {{ user.username }}</h1>
-           
-    <h1>Change username</h1>       
+    
+    <h2>Change username</h2>       
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{ form_end(form) }}
+    {{ form_end(form) }}    
+    
+    <h2>Favorite books</h2>
+    {% if favorite_books is not empty %}
+        {% for book in favorite_books %}
+            {% include 'book/book.html.twig' %}
+            <br><br>            
+        {% endfor %}
+    {% endif %}
    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var is_user_page = true;
+    </script>    
 {% endblock %}

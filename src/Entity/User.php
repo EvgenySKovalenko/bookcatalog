@@ -44,11 +44,45 @@ class User implements UserInterface {
      */
     private $roles;
 
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     */
+    private $favoritebooks = [];
+
     public function __construct() {
         $this->roles = array('ROLE_USER');
     }
 
     // other properties and methods
+    
+    public function isBookInFavorites($book_id)
+    {
+        return in_array($book_id, $this->favoritebooks);
+    }
+    
+    public function addBookToFavorites($book_id)
+    {
+        if ($this->isBookInFavorites($book_id)) {
+            return false;
+        } else {
+            $this->favoritebooks[] = $book_id;
+            return true;
+        }
+        
+    }    
+    
+    public function removeBookFromFavorites($book_id)
+    {
+        if ($this->isBookInFavorites($book_id)) {
+            if (($key = array_search($book_id, $this->favoritebooks)) !== false) {
+                unset($this->favoritebooks[$key]);
+            }            
+            return true;
+        } else {
+            return false;
+        }
+        
+    }      
 
     public function getId() {
         return $this->id;
@@ -90,6 +124,18 @@ class User implements UserInterface {
 
     public function eraseCredentials() {
         
+    }
+
+    public function getFavoritebooks(): ?array
+    {
+        return $this->favoritebooks;
+    }
+
+    public function setFavoritebooks(?array $favoritebooks): self
+    {
+        $this->favoritebooks = $favoritebooks;
+
+        return $this;
     }
 
 }

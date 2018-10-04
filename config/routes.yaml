@@ -46,4 +46,12 @@ book_delete:
     
 user_profile:
     path: /user/{id}
-    controller: App\Controller\UserController::profile     
+    controller: App\Controller\UserController::profile 
+
+addbooktofavorites:    
+    path: /addbooktofavorites
+    controller: App\Controller\UserController::addBookToFavorites 
+
+removebookfromfavorites:    
+    path: /removebookfromfavorites
+    controller: App\Controller\UserController::removeBookFromFavorites     

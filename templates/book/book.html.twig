@@ -1,7 +1,15 @@
-<strong>{{ book.name }}</strong><br> 
+<strong>{{ book.name }}</strong>
+
+{% if app.user is not empty %}
+    <a href="#" id="add_{{ book.id }}" class='addtofavorites' data-bookid='{{ book.id }}'
+        style="display: {{ book.id in app.user.getFavoritebooks() ? 'none' : 'inline' }};">[ADD TO FAVORITES]</a> 
+    <a href="#" id="remove_{{ book.id }}" class='removefromfavorites' data-bookid='{{ book.id }}' 
+       style="display: {{ book.id in app.user.getFavoritebooks() ? 'inline' : 'none' }};">[REMOVE FROM FAVORITES]</a>
+{% endif %}    
+    <br> 
 Author: <a href="{{ path('authors', {'id': book.author.id}) }}">{{ book.author.name }}</a><br>
 Genre: <a href="{{ path('genres', {'id': book.genre.id}) }}">{{ book.genre.name }}</a><br>
 Published: {{ book.publishdate|date('Y-m-d') }}<br>
 Rating: {{ book.rating }}<br>
-<a href="{{ path('book_edit', {'id': book.id}) }}">EDIT</a> 
-<a href="{{ path('book_delete', {'id': book.id}) }}">DELETE</a>
+<a href="{{ path('book_edit', {'id': book.id}) }}">[EDIT]</a> 
+<a href="{{ path('book_delete', {'id': book.id}) }}">[DELETE]</a>

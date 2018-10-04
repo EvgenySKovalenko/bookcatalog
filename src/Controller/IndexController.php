@@ -12,10 +12,11 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class IndexController extends AbstractController
 {
-    public function index(Request $request)
+    public function index(Request $request, AuthorizationCheckerInterface $authChecker)
     {        
         //Create Book form
         $book = new Book();
@@ -45,11 +46,11 @@ class IndexController extends AbstractController
         
         $repository = $this->getDoctrine()->getRepository(Book::class);
         //$books = $repository->findBy([], ['dateadded' => 'DESC'], 10);
-        $books = $repository->findBy([], ['dateadded' => 'DESC']);
+        $books = $repository->findBy([], ['dateadded' => 'DESC']);       
         
         return $this->render('index.html.twig', [
                 'books' => $books,
-                'form_create'  =>  $form_create->createView()
+                'form_create'  =>  $form_create->createView(),
             ]);        
     }    
     
